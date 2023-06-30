@@ -1,17 +1,12 @@
-import { environment } from 'src/environments/environment';
 import { Component } from '@angular/core';
-import { HttpClient } from "@angular/common/http"
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
-const API_URL = environment.API_URL;
-const API_KEY = environment.API_KEY;
+const API_URL = 'https://newsapi.org/v2';
+const API_KEY = 'b0d6e4609dff4b86b45e86e8b38b712d';
 
-import { HttpClient
-import{environment} } from 'src/environments/environment';
-
-interface WeatherResponse {
-  main: {
-    temp: number;
-  };
+interface NewsResponse {
+  articles: any[];
   // Other properties from the response if needed
 }
 
@@ -21,17 +16,18 @@ interface WeatherResponse {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  weatherTemp :any
-  todayDate = new Date()
-  constructor(public httpClient:HttpClient) {
-    this.loadData()
+  newsData: any[]; // Add the newsData property declaration
+
+  constructor(public httpClient: HttpClient) {
+    this.loadData();
   }
 
-  loadData(){
-      this.httpClient.get<WeatherResponse>(`${API_URL}/weather?q=${"Dublin"}&appid=${API_KEY}`).subscribe(results =>{
+  loadData() {
+    this.httpClient
+      .get<NewsResponse>(`${API_URL}/top-headlines?country=Ireland&apiKey=${API_KEY}`)
+      .subscribe((results) => {
         console.log(results);
-        this.weatherTemp = results.main
-        // console.log(this.weatherTemp)
-    })
+        this.newsData = results.articles;
+      });
   }
-
+}

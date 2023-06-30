@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; // Add this import statement
+import { HttpClientModule } from '@angular/common/http';
 import { HomePage } from './home.page';
-import { environment } from 'src/environments/environment';
 import { HomePageRoutingModule } from './home-routing.module';
 
 @NgModule({
@@ -12,8 +11,8 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
-    HttpClientModule // Add HttpClientModule to the imports array
+    HttpClientModule,
+    HomePageRoutingModule
   ],
   declarations: [HomePage]
 })
